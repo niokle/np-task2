@@ -43,6 +43,3 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**
 !**/src/test/**
-
-# application-dev.properties
-application-dev.properties
