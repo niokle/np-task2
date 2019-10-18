@@ -54,10 +54,10 @@ public class PersonRepositoryTest {
         long personId1 = personRepository.save(person1).getId();
         long personId2 = personRepository.save(person2).getId();
         int afterSave = personRepository.findAll().size();
+        int result = afterSave - beforeSave;
 
         //then
-        Assert.assertEquals(0, beforeSave);
-        Assert.assertEquals(2, afterSave);
+        Assert.assertEquals(2, result);
 
         //cleanup
         personRepository.deleteById(personId1);

@@ -66,7 +66,7 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void getAllPersons() {
+    public void getAllPersonsSorted() {
         //given
         Person person1 = new Person("Michal", "Nowak", LocalDate.of(1999, 1, 1), "123456789");
         Person person2 = new Person("Ewa", "Koska", LocalDate.of(2015, 2, 2), "545655443");
