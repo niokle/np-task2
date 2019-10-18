@@ -1,9 +1,9 @@
-package service;
+package application.service;
 
-import domain.Person;
+import application.domain.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.PersonRepository;
+import application.repository.PersonRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,11 +21,23 @@ public class PersonService {
         return personRepository.findById(id);
     }
 
-    public Long savePerson(Person person) {
-        return personRepository.save(person).getId();
+    public Person savePerson(Person person) {
+        return personRepository.save(person);
     }
 
     public List<Person> getAllPersons() {
         return personRepository.findAll();
+    }
+
+    public void deletePerson(Long id) {
+        personRepository.deleteById(id);
+    }
+
+    public List<Person> getPersonsByPhoneNo(String phoneNo) {
+        return personRepository.findByPhoneNo(phoneNo);
+    }
+
+    public List<Person> getPersonsByContainsLastName(String lastName) {
+        return personRepository.findByLastNameContains(lastName);
     }
 }

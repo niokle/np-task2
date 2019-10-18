@@ -1,9 +1,8 @@
-package repository;
+package application.repository;
 
-import domain.Person;
+import application.domain.Person;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -17,4 +16,8 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
 
     @Override
     Optional<Person> findById(Long id);
+
+    List<Person> findByPhoneNo(String phoneNo);
+
+    List<Person> findByLastNameContains(String lastName);
 }
