@@ -69,21 +69,27 @@ public class PersonServiceTest {
     public void getAllPersons() {
         //given
         Person person1 = new Person("Michal", "Nowak", LocalDate.of(1999, 1, 1), "123456789");
-        Person person2 = new Person("Ewa", "Koska", LocalDate.of(1988, 2, 2), "545655443");
+        Person person2 = new Person("Ewa", "Koska", LocalDate.of(2015, 2, 2), "545655443");
+        Person person3 = new Person("Zosia", "Koska", LocalDate.of(2000, 2, 2), "545655555");
 
         //when
-        int beforeSave = personService.getAllPersons().size();
+        int beforeSave = personService.getAllPersonsSorted().size();
         long personId1 = personService.savePerson(person1).getId();
         long personId2 = personService.savePerson(person2).getId();
-        int afterSave = personService.getAllPersons().size();
+        long personId3 = personService.savePerson(person3).getId();
+        int afterSave = personService.getAllPersonsSorted().size();
 
         //then
         Assert.assertEquals(0, beforeSave);
-        Assert.assertEquals(2, afterSave);
+        Assert.assertEquals(3, afterSave);
+        Assert.assertEquals("Michal", personService.getAllPersonsSorted().get(0).getFirstName());
+        Assert.assertEquals("Zosia", personService.getAllPersonsSorted().get(1).getFirstName());
+        Assert.assertEquals("Ewa", personService.getAllPersonsSorted().get(2).getFirstName());
 
         //cleanup
         personService.deletePerson(personId1);
         personService.deletePerson(personId2);
+        personService.deletePerson(personId3);
     }
 
     @Test

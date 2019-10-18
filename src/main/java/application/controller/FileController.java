@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @CrossOrigin("*")
 @Controller
-@RequestMapping("v1/")
+@RequestMapping("v1/file/")
 public class FileController {
     private FileService fileService;
 

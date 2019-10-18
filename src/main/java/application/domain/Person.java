@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @Getter
 @Setter
@@ -26,5 +27,13 @@ public class Person {
         this.lastName = lastName;
         this.birthDate = birthDate;
         this.phoneNo = phoneNo;
+    }
+
+    public long getAgeYears() {
+        return ChronoUnit.YEARS.between(LocalDate.of(birthDate.getYear(), birthDate.getMonth(), birthDate.getDayOfMonth()), LocalDate.now());
+    }
+
+    public long getAgeDays() {
+        return ChronoUnit.DAYS.between(LocalDate.of(birthDate.getYear(), birthDate.getMonth(), birthDate.getDayOfMonth()), LocalDate.now());
     }
 }

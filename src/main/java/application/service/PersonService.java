@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import application.repository.PersonRepository;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,8 +26,10 @@ public class PersonService {
         return personRepository.save(person);
     }
 
-    public List<Person> getAllPersons() {
-        return personRepository.findAll();
+    public List<Person> getAllPersonsSorted() {
+        List<Person> persons = personRepository.findAll();
+        persons.sort(Comparator.comparing(Person::getAgeDays).reversed());
+        return persons;
     }
 
     public void deletePerson(Long id) {
@@ -39,5 +42,9 @@ public class PersonService {
 
     public List<Person> getPersonsByContainsLastName(String lastName) {
         return personRepository.findByLastNameContains(lastName);
+    }
+
+    public void deleteAllPersons() {
+        personRepository.deleteAll();
     }
 }

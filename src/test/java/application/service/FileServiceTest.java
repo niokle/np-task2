@@ -38,7 +38,7 @@ public class FileServiceTest {
         fileService.dataProcessing(multipartFile);
 
         //then
-        Assert.assertEquals(3, personService.getAllPersons().size());
+        Assert.assertEquals(3, personService.getAllPersonsSorted().size());
         Assert.assertEquals(7, rejectedService.getAllRejected().size());
 
         //cleanup
