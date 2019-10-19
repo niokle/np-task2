@@ -1,4 +1,5 @@
 package application.service;
+
 import application.domain.Rejected;
 import org.junit.Assert;
 import org.junit.Test;

@@ -39,16 +39,28 @@ public class FileService {
             String message = fileServiceFunctions.checkFirstName(record[0]) + fileServiceFunctions.checkLastName(record[1])
                     + fileServiceFunctions.checkBirthDate(record[2]) + fileServiceFunctions.checkPhoneNo(record[3]);
             if (message.equals("")) {
-                if (personService.getPersonsByPhoneNo(record[3]).size() == 0) {
-                    personService.savePerson(new Person(record[0], record[1], fileServiceFunctions.birthDateConvert(record[2]), record[3]));
+                if (isPhoneNumberExists(record[3])) {
+                    savePerson(record[0], record[1], record[2], record[3]);
                 } else {
-                    rejectedService.saveRejected(new Rejected(line, "Osoba z takim numerem telefonu już istnieje. ", fileName));
+                    saveRejected(line, "Osoba z takim numerem telefonu już istnieje. ", fileName);
                 }
             } else {
-                rejectedService.saveRejected(new Rejected(line, message, fileName));
+                saveRejected(line, message, fileName);
             }
         } else {
-            rejectedService.saveRejected(new Rejected(line, "Nieprawidlowa ilosc kolumn. ", fileName));
+            saveRejected(line, "Nieprawidlowa ilosc kolumn. ", fileName);
         }
+    }
+
+    private void saveRejected(String record, String description, String fileName) {
+        rejectedService.saveRejected(new Rejected(record, description, fileName));
+    }
+
+    private boolean isPhoneNumberExists(String phoneNo) {
+        return personService.getPersonsByPhoneNo(phoneNo).size() == 0;
+    }
+
+    private void savePerson(String firstName, String lastName, String birthDate, String phoneNo) {
+        personService.savePerson(new Person(firstName, lastName, fileServiceFunctions.birthDateConvert(birthDate), phoneNo));
     }
 }

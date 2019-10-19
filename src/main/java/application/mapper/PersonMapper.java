@@ -3,7 +3,6 @@ package application.mapper;
 import application.domain.Person;
 import application.dto.PersonDto;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 
