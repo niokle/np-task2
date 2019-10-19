@@ -23,6 +23,9 @@ public class FileServiceTest {
     @Autowired
     RejectedService rejectedService;
 
+    @Autowired
+    FileServiceFunctions fileServiceFunctions;
+
     @Test
     public void dataProcessing() throws IOException {
         //given
@@ -31,7 +34,7 @@ public class FileServiceTest {
         FileInputStream input = new FileInputStream(file);
         MultipartFile multipartFile = new MockMultipartFile("file",
                 file.getName(), "text/plain", IOUtils.toByteArray(input));
-        FileService fileService = new FileService(personService, rejectedService);
+        FileService fileService = new FileService(personService, rejectedService, fileServiceFunctions);
 
         //when
         fileService.dataProcessing(multipartFile);

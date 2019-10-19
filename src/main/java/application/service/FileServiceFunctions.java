@@ -10,19 +10,19 @@ import static java.util.regex.Pattern.matches;
 public class FileServiceFunctions {
 
     public boolean isNumeric(String string) {
-        return matches("d+", string);
+        return matches("[0-9]+", string);
     }
 
     public String checkPhoneNo(String phoneNo) {
-        if (phoneNo.length() != 9 && !isNumeric(phoneNo)) {
-            return "Błąd w polu telefon. ";
+        if (phoneNo.length() == 9 && isNumeric(phoneNo)) {
+            return "";
         }
-        return "";
+        return "Błąd w polu telefon. ";
     }
 
     public String checkBirthDate(String birthDate) {
         try {
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.d");
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.M.d");
             LocalDate localDate = LocalDate.parse(birthDate, dateTimeFormatter);
         } catch (DateTimeException e) {
             return "Błąd w polu data urodzenia. ";
@@ -45,7 +45,7 @@ public class FileServiceFunctions {
     }
 
     public LocalDate birthDateConvert(String string) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.d");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.M.d");
         return LocalDate.parse(string, dateTimeFormatter);
     }
 }
