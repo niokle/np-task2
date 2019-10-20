@@ -1,6 +1,7 @@
 package application.service;
 
 import application.domain.Person;
+import application.exception.PersonNotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -126,6 +127,28 @@ public class PersonServiceTest {
 
         //then
         Assert.assertEquals(2, resultPersons.size());
+
+        //cleanup
+        personService.deletePerson(personId1);
+        personService.deletePerson(personId2);
+        personService.deletePerson(personId3);
+    }
+
+    @Test
+    public void testGetOldestPerson() throws PersonNotFoundException {
+        //given
+        Person person1 = new Person("Michal", "Nowak", LocalDate.of(2015, 1, 1), "123456789");
+        Person person2 = new Person("Ewa", "Koska", LocalDate.of(1823, 2, 2), "545655443");
+        Person person3 = new Person("Zosia", "Koska", LocalDate.of(2000, 2, 2), "545655555");
+
+        //when
+        long personId1 = personService.savePerson(person1).getId();
+        long personId2 = personService.savePerson(person2).getId();
+        long personId3 = personService.savePerson(person3).getId();
+        Optional<Person> resultPerson = Optional.ofNullable(personService.getOldestPersons());
+
+        //then
+        Assert.assertEquals("Ewa", resultPerson.get().getFirstName());
 
         //cleanup
         personService.deletePerson(personId1);

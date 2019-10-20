@@ -2,6 +2,8 @@ package application.service;
 
 import application.domain.Person;
 import application.domain.Rejected;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +18,8 @@ public class FileService {
     private final RejectedService rejectedService;
     private final FileServiceFunctions fileServiceFunctions;
 
+    private static Logger LOGGER = LoggerFactory.getLogger(FileService.class);
+
     @Autowired
     public FileService(PersonService personService, RejectedService rejectedService, FileServiceFunctions fileServiceFunctions) {
         this.personService = personService;
@@ -24,6 +28,7 @@ public class FileService {
     }
 
     public void dataProcessing(MultipartFile multipartFile) throws IOException {
+        LOGGER.info("rozpoczęcie przetwarzania pliku");
         String fileName = multipartFile.getOriginalFilename();
         InputStream inputStream = multipartFile.getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -31,6 +36,7 @@ public class FileService {
             String line = reader.readLine();
             saveData(fileName, line);
         }
+        LOGGER.info("zakończenie przetwarzania pliku");
     }
 
     private void saveData(String fileName, String line) {
@@ -54,6 +60,7 @@ public class FileService {
 
     private void saveRejected(String record, String description, String fileName) {
         rejectedService.saveRejected(new Rejected(record, description, fileName));
+        LOGGER.info("zapis do tabeli rejected (record // description // filename): " + record + " // " + description + " // " + fileName);
     }
 
     private boolean isPhoneNumberExists(String phoneNo) {
@@ -62,5 +69,7 @@ public class FileService {
 
     private void savePerson(String firstName, String lastName, String birthDate, String phoneNo) {
         personService.savePerson(new Person(firstName, lastName, fileServiceFunctions.birthDateConvert(birthDate), phoneNo));
+        LOGGER.info("zapis rekordu do tabeli persons (first name // last name // birth date // phone): " +
+                firstName + " // " + lastName + " // " + birthDate + " // " + phoneNo);
     }
 }

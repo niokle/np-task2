@@ -1,4 +1,4 @@
 package application.exception;
 
-public class PersonNotFoundException {
+public class PersonNotFoundException extends Exception {
 }

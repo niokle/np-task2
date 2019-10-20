@@ -1,6 +1,7 @@
 package application.controller;
 
 import application.dto.PersonDto;
+import application.exception.PersonNotFoundException;
 import application.mapper.PersonMapper;
 import application.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,10 @@ public class PersonController {
     @DeleteMapping("all")
     public void deleteAllPersons() {
         personService.deleteAllPersons();
+    }
+
+    @GetMapping("oldest")
+    public PersonDto getOldestPerson() throws PersonNotFoundException {
+        return personMapper.personToPersonDto(personService.getOldestPersons());
     }
 }

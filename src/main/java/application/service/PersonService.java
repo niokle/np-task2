@@ -1,6 +1,7 @@
 package application.service;
 
 import application.domain.Person;
+import application.exception.PersonNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import application.repository.PersonRepository;
@@ -45,5 +46,11 @@ public class PersonService {
 
     public void deleteAllPersons() {
         personRepository.deleteAll();
+    }
+
+    public Person getOldestPersons() throws PersonNotFoundException {
+        return personRepository.findAll().stream()
+                    .max(Comparator.comparing(Person::getAgeDays))
+                    .orElseThrow(PersonNotFoundException::new);
     }
 }
