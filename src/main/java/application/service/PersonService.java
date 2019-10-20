@@ -1,7 +1,11 @@
 package application.service;
 
 import application.domain.Person;
+import application.domain.Rejected;
 import application.exception.PersonNotFoundException;
+import application.exception.RejectedNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import application.repository.PersonRepository;
@@ -13,42 +17,64 @@ import java.util.Optional;
 public class PersonService {
     private PersonRepository personRepository;
 
+    private static Logger LOGGER = LoggerFactory.getLogger(PersonService.class);
+
     @Autowired
     public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
 
-    public Optional<Person> getPerson(Long id) {
-        return personRepository.findById(id);
+    public Optional<Person> getPerson(Long id) throws PersonNotFoundException {
+        try {
+            Optional<Person> personResult = personRepository.findById(id);
+            LOGGER.info("pobrano rekord, id: " + personResult.get().getId());
+            return personResult;
+        } catch (Exception ex) {
+            LOGGER.error("brak rekordu w bazie, id: " + id);
+            throw new PersonNotFoundException();
+        }
     }
 
     public Person savePerson(Person person) {
-        return personRepository.save(person);
+        Person personSaved = personRepository.save(person);
+        LOGGER.info("zapisano rekord, id:" + personSaved.getId());
+        return personSaved;
     }
 
     public List<Person> getAllPersonsSorted() {
+        LOGGER.info("pobieranie wszystkich rekordów posortowanych po wieku");
         List<Person> persons = personRepository.findAll();
         persons.sort(Comparator.comparing(Person::getAgeDays).reversed());
         return persons;
     }
 
-    public void deletePerson(Long id) {
-        personRepository.deleteById(id);
+    public void deletePerson(Long id) throws PersonNotFoundException {
+        try {
+            personRepository.deleteById(id);
+            LOGGER.info("usnięto rekord, id: " + id);
+        } catch (Exception ex) {
+            LOGGER.error("nie można usunąć, brak rekordu w bazie, id: " + id);
+            throw new PersonNotFoundException();
+        }
     }
 
     public List<Person> getPersonsByPhoneNo(String phoneNo) {
+        LOGGER.info("pobieranie rekordów po numerze telefonu");
         return personRepository.findByPhoneNo(phoneNo);
     }
 
     public List<Person> getPersonsByContainsLastName(String lastName) {
+        LOGGER.info("pobieranie rekordów po nazwisku");
         return personRepository.findByLastNameContains(lastName);
     }
 
     public void deleteAllPersons() {
+        LOGGER.info("usuwanie wszystkich rekordów");
         personRepository.deleteAll();
     }
 
     public Person getOldestPersons() throws PersonNotFoundException {
+        LOGGER.info("pobieranie rekordu z najstarszą osobą");
         return personRepository.findAll().stream()
                     .max(Comparator.comparing(Person::getAgeDays))
                     .orElseThrow(PersonNotFoundException::new);

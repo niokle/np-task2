@@ -20,7 +20,7 @@ public class PersonServiceTest {
     PersonService personService;
 
     @Test
-    public void getPerson() {
+    public void getPerson() throws PersonNotFoundException {
         //given
         Person person1 = new Person("Michal", "Nowak", LocalDate.of(1999, 1, 1), "123456789");
         Person person2 = new Person("Ewa", "Koska", LocalDate.of(1988, 2, 2), "545655443");
@@ -42,7 +42,7 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void savePerson() {
+    public void savePerson() throws PersonNotFoundException {
         //given
         Person person1 = new Person("Michal", "Nowak", LocalDate.of(1999, 1, 1), "123456789");
         Person person2 = new Person("Ewa", "Koska", LocalDate.of(1988, 2, 2), "545655443");
@@ -67,7 +67,7 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void getAllPersonsSorted() {
+    public void getAllPersonsSorted() throws PersonNotFoundException {
         //given
         Person person1 = new Person("Michal", "Nowak", LocalDate.of(1999, 1, 1), "123456789");
         Person person2 = new Person("Ewa", "Koska", LocalDate.of(2015, 2, 2), "545655443");
@@ -94,7 +94,7 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void testFindByPhoneNo() {
+    public void testFindByPhoneNo() throws PersonNotFoundException {
         //given
         Person person1 = new Person("Michal", "Nowak", LocalDate.of(1999, 1, 1), "123456789");
         Person person2 = new Person("Ewa", "Koska", LocalDate.of(1988, 2, 2), "545655443");
@@ -113,7 +113,7 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void testFindByContainsLastName() {
+    public void testFindByContainsLastName() throws PersonNotFoundException {
         //given
         Person person1 = new Person("Michal", "Nowak", LocalDate.of(1999, 1, 1), "123456789");
         Person person2 = new Person("Ewa", "Koska", LocalDate.of(1988, 2, 2), "545655443");

@@ -1,6 +1,7 @@
 package application.service;
 
 import application.domain.Rejected;
+import application.exception.RejectedNotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +17,7 @@ public class RejectedServiceTest {
     RejectedService rejectedService;
 
     @Test
-    public void getRejected() {
+    public void getRejected() throws RejectedNotFoundException {
         //given
         Rejected rejected1 = new Rejected("record1", "description1", "file1");
         Rejected rejected = rejectedService.saveRejected(rejected1);
@@ -34,7 +35,7 @@ public class RejectedServiceTest {
     }
 
     @Test
-    public void saveRejected() {
+    public void saveRejected() throws RejectedNotFoundException {
         //given
         Rejected rejected1 = new Rejected("record1", "description1", "file1");
         Rejected rejected2 = new Rejected("record2", "description2", "file2");
@@ -63,7 +64,7 @@ public class RejectedServiceTest {
     }
 
     @Test
-    public void getAllRejected() {
+    public void getAllRejected() throws RejectedNotFoundException {
         //given
         Rejected rejected1 = new Rejected("record1", "description1", "file1");
         Rejected rejected2 = new Rejected("record2", "description2", "file2");
@@ -108,7 +109,7 @@ public class RejectedServiceTest {
     }
 
     @Test
-    public void deleteRejectedByFileName() {
+    public void deleteRejectedByFileName() throws RejectedNotFoundException {
         //given
         Rejected rejected1 = new Rejected("record1", "description1", "file1");
         Rejected rejected2 = new Rejected("record2", "description2", "file2");

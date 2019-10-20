@@ -1,5 +1,6 @@
 package application.service;
 
+import application.exception.PersonNotFoundException;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -27,7 +28,7 @@ public class FileServiceTest {
     FileServiceFunctions fileServiceFunctions;
 
     @Test
-    public void dataProcessing() throws IOException {
+    public void dataProcessing() throws IOException, PersonNotFoundException {
         //given
         String path = "/Users/michalkleszczewski/Documents/Development/Projects/JAVA/newspoint-task2/src/main/resources/input.csv";
         File file = new File(path);

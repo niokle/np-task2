@@ -37,7 +37,12 @@ public class RejectedController {
     }
 
     @DeleteMapping("id/{id}")
-    public void deleteRejected(@PathVariable Long id) {
+    public void deleteRejected(@PathVariable Long id) throws RejectedNotFoundException {
         rejectedService.deleteRejected(id);
+    }
+
+    @DeleteMapping("filename/{fileName}")
+    public void deleteRejectedByName(@PathVariable String fileName) {
+        rejectedService.deleteRejectedByFileName(fileName);
     }
 }
