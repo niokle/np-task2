@@ -31,6 +31,11 @@ public class PersonController {
         return personMapper.personsToPersonsDtos(personService.getAllPersonsSorted());
     }
 
+    @GetMapping("listpaged")
+    public List<PersonDto> getAllPersonsSortedPaged(@RequestParam("page") int page) {
+        return personMapper.personsToPersonsDtos(personService.getAllPersonsSortedPaged(page));
+    }
+
     @GetMapping("lastname/{lastName}")
     public List<PersonDto> getPersonsByContainsLastName(@PathVariable String lastName) {
         return personMapper.personsToPersonsDtos(personService.getPersonsByContainsLastName(lastName));

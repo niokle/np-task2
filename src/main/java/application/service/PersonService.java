@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import application.repository.PersonRepository;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -44,6 +45,29 @@ public class PersonService {
         List<Person> persons = personRepository.findAll();
         persons.sort(Comparator.comparing(Person::getAgeDays).reversed());
         return persons;
+    }
+
+    public List<Person> getAllPersonsSortedPaged(int page) {
+        List<Person> allPersonsSorted = getAllPersonsSorted();
+        List<Person> personsList = new ArrayList<>();
+        int recordsPerPage = 5;
+        int lastRecordNo = page * recordsPerPage;
+        int firstRecordNo = lastRecordNo - recordsPerPage + 1;
+        if (lastRecordNo > allPersonsSorted.size()) {
+            lastRecordNo = allPersonsSorted.size();
+        }
+
+        if (firstRecordNo <= lastRecordNo) {
+            for (int i = firstRecordNo - 1; i < lastRecordNo; i++) {
+                personsList.add(allPersonsSorted.get(i));
+            }
+            LOGGER.info("pobieranie wszystkich rekordów posortowanych po wieku ze strony " + page
+                    + " (" + recordsPerPage + " rekordów na strone)");
+        } else {
+            LOGGER.info("nie ma rekordów na stronie " + page
+                    + " (" + recordsPerPage + " rekordów na strone)");
+        }
+        return personsList;
     }
 
     public void deletePerson(Long id) throws PersonNotFoundException {
