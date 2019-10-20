@@ -22,8 +22,10 @@ public class PersonServiceTest {
     @Test
     public void getPerson() throws PersonNotFoundException {
         //given
-        Person person1 = new Person("Michal", "Nowak", LocalDate.of(1999, 1, 1), "123456789");
-        Person person2 = new Person("Ewa", "Koska", LocalDate.of(1988, 2, 2), "545655443");
+        Person person1 = new Person("Michal", "Nowak",
+                LocalDate.of(1999, 1, 1), "123456789");
+        Person person2 = new Person("Ewa", "Koska",
+                LocalDate.of(1988, 2, 2), "545655443");
         long personId1 = personService.savePerson(person1).getId();
         long personId2 = personService.savePerson(person2).getId();
 
@@ -44,8 +46,10 @@ public class PersonServiceTest {
     @Test
     public void savePerson() throws PersonNotFoundException {
         //given
-        Person person1 = new Person("Michal", "Nowak", LocalDate.of(1999, 1, 1), "123456789");
-        Person person2 = new Person("Ewa", "Koska", LocalDate.of(1988, 2, 2), "545655443");
+        Person person1 = new Person("Michal", "Nowak",
+                LocalDate.of(1999, 1, 1), "123456789");
+        Person person2 = new Person("Ewa", "Koska",
+                LocalDate.of(1988, 2, 2), "545655443");
 
         //when
         Person resultPerson1 = personService.savePerson(person1);
@@ -69,9 +73,12 @@ public class PersonServiceTest {
     @Test
     public void getAllPersonsSorted() throws PersonNotFoundException {
         //given
-        Person person1 = new Person("Michal", "Nowak", LocalDate.of(1999, 1, 1), "123456789");
-        Person person2 = new Person("Ewa", "Koska", LocalDate.of(2015, 2, 2), "545655443");
-        Person person3 = new Person("Zosia", "Koska", LocalDate.of(2000, 2, 2), "545655555");
+        Person person1 = new Person("Michal", "Nowak",
+                LocalDate.of(1999, 1, 1), "123456789");
+        Person person2 = new Person("Ewa", "Koska",
+                LocalDate.of(2015, 2, 2), "545655443");
+        Person person3 = new Person("Zosia", "Koska",
+                LocalDate.of(2000, 2, 2), "545655555");
 
         //when
         int beforeSave = personService.getAllPersonsSorted().size();
@@ -96,8 +103,10 @@ public class PersonServiceTest {
     @Test
     public void testFindByPhoneNo() throws PersonNotFoundException {
         //given
-        Person person1 = new Person("Michal", "Nowak", LocalDate.of(1999, 1, 1), "123456789");
-        Person person2 = new Person("Ewa", "Koska", LocalDate.of(1988, 2, 2), "545655443");
+        Person person1 = new Person("Michal", "Nowak",
+                LocalDate.of(1999, 1, 1), "123456789");
+        Person person2 = new Person("Ewa", "Koska",
+                LocalDate.of(1988, 2, 2), "545655443");
         long personId1 = personService.savePerson(person1).getId();
         long personId2 = personService.savePerson(person2).getId();
 
@@ -115,9 +124,12 @@ public class PersonServiceTest {
     @Test
     public void testFindByContainsLastName() throws PersonNotFoundException {
         //given
-        Person person1 = new Person("Michal", "Nowak", LocalDate.of(1999, 1, 1), "123456789");
-        Person person2 = new Person("Ewa", "Koska", LocalDate.of(1988, 2, 2), "545655443");
-        Person person3 = new Person("Marek", "Nowakowski", LocalDate.of(1987, 2, 2), "545655454");
+        Person person1 = new Person("Michal", "Nowak",
+                LocalDate.of(1999, 1, 1), "123456789");
+        Person person2 = new Person("Ewa", "Koska",
+                LocalDate.of(1988, 2, 2), "545655443");
+        Person person3 = new Person("Marek", "Nowakowski",
+                LocalDate.of(1987, 2, 2), "545655454");
         long personId1 = personService.savePerson(person1).getId();
         long personId2 = personService.savePerson(person2).getId();
         long personId3 = personService.savePerson(person3).getId();
@@ -137,9 +149,12 @@ public class PersonServiceTest {
     @Test
     public void testGetOldestPerson() throws PersonNotFoundException {
         //given
-        Person person1 = new Person("Michal", "Nowak", LocalDate.of(2015, 1, 1), "123456789");
-        Person person2 = new Person("Ewa", "Koska", LocalDate.of(1823, 2, 2), "545655443");
-        Person person3 = new Person("Zosia", "Koska", LocalDate.of(2000, 2, 2), "545655555");
+        Person person1 = new Person("Michal", "Nowak",
+                LocalDate.of(2015, 1, 1), "123456789");
+        Person person2 = new Person("Ewa", "Koska",
+                LocalDate.of(1823, 2, 2), "545655443");
+        Person person3 = new Person("Zosia", "Koska",
+                LocalDate.of(2000, 2, 2), "545655555");
 
         //when
         long personId1 = personService.savePerson(person1).getId();

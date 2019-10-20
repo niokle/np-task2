@@ -1,9 +1,7 @@
 package application.service;
 
 import application.domain.Person;
-import application.domain.Rejected;
 import application.exception.PersonNotFoundException;
-import application.exception.RejectedNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

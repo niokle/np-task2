@@ -21,8 +21,10 @@ public class PersonRepositoryTest {
     @Test
     public void testSave() {
         //given
-        Person person1 = new Person("Michal", "Nowak", LocalDate.of(1999, 1, 1), "123456789");
-        Person person2 = new Person("Ewa", "Koska", LocalDate.of(1988, 2, 2), "545655443");
+        Person person1 = new Person("Michal", "Nowak",
+                LocalDate.of(1999, 1, 1), "123456789");
+        Person person2 = new Person("Ewa", "Koska",
+                LocalDate.of(1988, 2, 2), "545655443");
 
         //when
         Person resultPerson1 = personRepository.save(person1);
@@ -46,8 +48,10 @@ public class PersonRepositoryTest {
     @Test
     public void testFindAll() {
         //given
-        Person person1 = new Person("Michal", "Nowak", LocalDate.of(1999, 1, 1), "123456789");
-        Person person2 = new Person("Ewa", "Koska", LocalDate.of(1988, 2, 2), "545655443");
+        Person person1 = new Person("Michal", "Nowak",
+                LocalDate.of(1999, 1, 1), "123456789");
+        Person person2 = new Person("Ewa", "Koska",
+                LocalDate.of(1988, 2, 2), "545655443");
 
         //when
         int beforeSave = personRepository.findAll().size();
@@ -67,8 +71,10 @@ public class PersonRepositoryTest {
     @Test
     public void testFindById() {
         //given
-        Person person1 = new Person("Michal", "Nowak", LocalDate.of(1999, 1, 1), "123456789");
-        Person person2 = new Person("Ewa", "Koska", LocalDate.of(1988, 2, 2), "545655443");
+        Person person1 = new Person("Michal", "Nowak",
+                LocalDate.of(1999, 1, 1), "123456789");
+        Person person2 = new Person("Ewa", "Koska",
+                LocalDate.of(1988, 2, 2), "545655443");
         long personId1 = personRepository.save(person1).getId();
         long personId2 = personRepository.save(person2).getId();
 
@@ -89,8 +95,10 @@ public class PersonRepositoryTest {
     @Test
     public void testFindByPhoneNo() {
         //given
-        Person person1 = new Person("Michal", "Nowak", LocalDate.of(1999, 1, 1), "123456789");
-        Person person2 = new Person("Ewa", "Koska", LocalDate.of(1988, 2, 2), "545655443");
+        Person person1 = new Person("Michal", "Nowak",
+                LocalDate.of(1999, 1, 1), "123456789");
+        Person person2 = new Person("Ewa", "Koska",
+                LocalDate.of(1988, 2, 2), "545655443");
         long personId1 = personRepository.save(person1).getId();
         long personId2 = personRepository.save(person2).getId();
 
@@ -108,9 +116,12 @@ public class PersonRepositoryTest {
     @Test
     public void testFindByContainsLastName() {
         //given
-        Person person1 = new Person("Michal", "Nowak", LocalDate.of(1999, 1, 1), "123456789");
-        Person person2 = new Person("Ewa", "Koska", LocalDate.of(1988, 2, 2), "545655443");
-        Person person3 = new Person("Marek", "Nowakowski", LocalDate.of(1987, 2, 2), "545655454");
+        Person person1 = new Person("Michal", "Nowak",
+                LocalDate.of(1999, 1, 1), "123456789");
+        Person person2 = new Person("Ewa", "Koska",
+                LocalDate.of(1988, 2, 2), "545655443");
+        Person person3 = new Person("Marek", "Nowakowski",
+                LocalDate.of(1987, 2, 2), "545655454");
         long personId1 = personRepository.save(person1).getId();
         long personId2 = personRepository.save(person2).getId();
         long personId3 = personRepository.save(person3).getId();

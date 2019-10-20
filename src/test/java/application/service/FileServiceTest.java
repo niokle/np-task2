@@ -30,7 +30,7 @@ public class FileServiceTest {
     @Test
     public void dataProcessing() throws IOException, PersonNotFoundException {
         //given
-        String path = "/Users/michalkleszczewski/Documents/Development/Projects/JAVA/newspoint-task2/src/main/resources/input.csv";
+        String path = FileServiceTest.class.getResource("/input.csv").getPath();
         File file = new File(path);
         FileInputStream input = new FileInputStream(file);
         MultipartFile multipartFile = new MockMultipartFile("file",

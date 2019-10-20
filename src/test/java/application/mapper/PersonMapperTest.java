@@ -22,7 +22,8 @@ public class PersonMapperTest {
     @Test
     public void personToPersonDto() {
         //given
-        Person person = new Person(1L,"Michal", "Nowak", LocalDate.of(1999, 1, 1), "123456789");
+        Person person = new Person(1L,"Michal", "Nowak",
+                LocalDate.of(1999, 1, 1), "123456789");
 
         //when
         PersonDto personDto = personMapper.personToPersonDto(person);
@@ -38,8 +39,10 @@ public class PersonMapperTest {
     @Test
     public void personsToPersonsDtos() {
         //given
-        Person person1 = new Person(1L, "Michal", "Nowak", LocalDate.of(1999, 1, 1), "123456789");
-        Person person2 = new Person(2L, "Zosia", "Mak", LocalDate.of(2000, 2, 2), "987654321");
+        Person person1 = new Person(1L, "Michal", "Nowak",
+                LocalDate.of(1999, 1, 1), "123456789");
+        Person person2 = new Person(2L, "Zosia", "Mak",
+                LocalDate.of(2000, 2, 2), "987654321");
         List<Person> persons = new ArrayList<>();
         persons.add(person1);
         persons.add(person2);

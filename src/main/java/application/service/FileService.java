@@ -60,7 +60,8 @@ public class FileService {
 
     private void saveRejected(String record, String description, String fileName) {
         rejectedService.saveRejected(new Rejected(record, description, fileName));
-        LOGGER.info("zapis do tabeli rejected (record // description // filename): " + record + " // " + description + " // " + fileName);
+        LOGGER.info("zapis do tabeli rejected (record // description // filename): " + record + " // " + description
+                + " // " + fileName);
     }
 
     private boolean isPhoneNumberExists(String phoneNo) {
@@ -69,7 +70,7 @@ public class FileService {
 
     private void savePerson(String firstName, String lastName, String birthDate, String phoneNo) {
         personService.savePerson(new Person(firstName, lastName, fileServiceFunctions.birthDateConvert(birthDate), phoneNo));
-        LOGGER.info("zapis rekordu do tabeli persons (first name // last name // birth date // phone): " +
-                firstName + " // " + lastName + " // " + birthDate + " // " + phoneNo);
+        LOGGER.info("zapis rekordu do tabeli persons (first name // last name // birth date // phone): "
+                + firstName + " // " + lastName + " // " + birthDate + " // " + phoneNo);
     }
 }
