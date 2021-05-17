@@ -1,12 +1,12 @@
 package application.service;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import static java.util.regex.Pattern.matches;
 
-@Component
+@Service
 public class FileServiceFunctions {
 
     public boolean isNumeric(String string) {

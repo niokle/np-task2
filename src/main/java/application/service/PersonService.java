@@ -30,7 +30,7 @@ public class PersonService {
             return personResult;
         } catch (Exception ex) {
             LOGGER.error("brak rekordu w bazie, id: " + id);
-            throw new PersonNotFoundException();
+            throw new PersonNotFoundException("brak rekordu w bazie, id: " + id);
         }
     }
 
@@ -76,7 +76,7 @@ public class PersonService {
             LOGGER.info("usnięto rekord, id: " + id);
         } catch (Exception ex) {
             LOGGER.error("nie można usunąć, brak rekordu w bazie, id: " + id);
-            throw new PersonNotFoundException();
+            throw new PersonNotFoundException("nie można usunąć, brak rekordu w bazie, id: " + id);
         }
     }
 
@@ -97,8 +97,11 @@ public class PersonService {
 
     public Person getOldestPersons() throws PersonNotFoundException {
         LOGGER.info("pobieranie rekordu z najstarszą osobą");
-        return personRepository.findAll().stream()
-                    .max(Comparator.comparing(Person::getAgeDays))
-                    .orElseThrow(PersonNotFoundException::new);
+        try {
+            return personRepository.findAll().stream()
+                    .max(Comparator.comparing(Person::getAgeDays)).orElseThrow(Exception::new);
+        } catch (Exception ex) {
+            throw new PersonNotFoundException("brak rekordów w bazie");
+        }
     }
 }

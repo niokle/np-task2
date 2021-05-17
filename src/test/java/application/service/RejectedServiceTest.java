@@ -88,7 +88,22 @@ public class RejectedServiceTest {
     }
 
     @Test
-    public void deleteRejected() {
+    public void deleteRejected() throws RejectedNotFoundException {
+        //given
+        Rejected rejected1 = new Rejected("record1", "description1", "file1");
+        Rejected rejected2 = new Rejected("record2", "description2", "file2");
+        Rejected rejected3 = new Rejected("record3", "description3", "file3");
+        Rejected resultRejected1 = rejectedService.saveRejected(rejected1);
+        Rejected resultRejected2 = rejectedService.saveRejected(rejected2);
+        Rejected resultRejected3 = rejectedService.saveRejected(rejected3);
+
+        //when
+        rejectedService.deleteRejected(resultRejected1.getId());
+        rejectedService.deleteRejected(resultRejected2.getId());
+
+        //then
+        Assert.assertEquals(1, rejectedService.getAllRejected().size());
+        Assert.assertEquals("file3", rejectedService.getAllRejected().get(0).getFileName());
     }
 
     @Test
@@ -129,5 +144,16 @@ public class RejectedServiceTest {
 
         //cleanup
         rejectedService.deleteRejected(rejected1.getId());
+    }
+
+    @Test(expected = RejectedNotFoundException.class)
+    public void getRejectedException() throws RejectedNotFoundException {
+        //given
+
+        //when
+        Rejected resultRejected = rejectedService.getRejected(1L).get();
+
+        //then
+
     }
 }

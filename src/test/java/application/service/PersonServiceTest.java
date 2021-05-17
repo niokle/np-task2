@@ -228,4 +228,24 @@ public class PersonServiceTest {
         personService.deletePerson(personId8);
         personService.deletePerson(personId9);
     }
+
+    @Test(expected = PersonNotFoundException.class)
+    public void testGetOldestPersonException() throws PersonNotFoundException {
+        //given
+
+        //when
+        Optional<Person> resultPerson = Optional.ofNullable(personService.getOldestPersons());
+
+        //then
+    }
+
+    @Test(expected = PersonNotFoundException.class)
+    public void getPersonException() throws PersonNotFoundException {
+        //given
+
+        //when
+        Optional<Person> resultPerson = personService.getPerson(1L);
+
+        //then
+    }
 }

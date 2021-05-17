@@ -28,7 +28,7 @@ public class RejectedService {
             return rejectedResult;
         } catch (Exception ex) {
             LOGGER.error("brak rekordu w bazie, id: " + id);
-            throw new RejectedNotFoundException();
+            throw new RejectedNotFoundException("brak rekordu w bazie, id: " + id);
         }
     }
 
@@ -49,7 +49,7 @@ public class RejectedService {
             LOGGER.info("usnięto rekord, id: " + id);
         } catch (Exception ex) {
             LOGGER.error("nie można usunąć, brak rekordu w bazie, id: " + id);
-            throw new RejectedNotFoundException();
+            throw new RejectedNotFoundException("nie można usunąć, brak rekordu w bazie, id: " + id);
         }
     }
 

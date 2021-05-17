@@ -28,7 +28,7 @@ public class RejectedController {
 
     @GetMapping("id/{id}")
     public RejectedDto getRejected(@PathVariable Long id) throws RejectedNotFoundException {
-        return rejectedMapper.rejectedToRejectedDto(rejectedService.getRejected(id).orElseThrow(RejectedNotFoundException::new));
+        return rejectedMapper.rejectedToRejectedDto(rejectedService.getRejected(id).orElseThrow(() -> new RejectedNotFoundException("brak rekordu w bazie, id: " + id)));
     }
 
     @DeleteMapping("all")
